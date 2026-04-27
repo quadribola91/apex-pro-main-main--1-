@@ -5,15 +5,7 @@ import footlogo from "../assets/ABAX logo_page-0001.jpg";
 import msiBadge from "../assets/certifications/MSIMember_Logo_PNG.png";
 
 export default function FooterSection() {
-  const [email, setEmail] = useState("");
   const [showModal, setShowModal] = useState(false);
-
-  // const handleSubscribe = (e) => {
-  //   e.preventDefault();
-  //   if (!email) return;
-  //   setShowModal(true);
-  //   setEmail("");
-  // };
 
   const closeModal = () => setShowModal(false);
 
@@ -22,8 +14,9 @@ export default function FooterSection() {
   return (
     <footer className="bg-white text-black mt-20 font-sans relative">
       <div className="max-w-7xl mx-auto px-6 py-14">
-        {/* Fixed grid layout */}
+        {/* Grid layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+          
           {/* Logo + Description */}
           <div>
             <img
@@ -77,7 +70,7 @@ export default function FooterSection() {
                 <Link to="/team" className="hover:text-brandYellow transition">
                   Team
                 </Link>
-              </li>{" "}
+              </li>
               <li>
                 <Link to="/FAQs" className="hover:text-brandYellow transition">
                   FAQs
@@ -120,7 +113,7 @@ export default function FooterSection() {
             </ul>
           </div>
 
-          {/* Certifications (NEW SECTION) */}
+          {/* Certifications */}
           <div>
             <h3 className="text-brandYellow text-lg font-semibold mb-5">
               Certifications
@@ -140,7 +133,7 @@ export default function FooterSection() {
           </div>
         </div>
 
-        {/* Divider */}
+        {/* Footer Bottom */}
         <div className="border-t border-gray-200 mt-10 pt-6 text-center text-black/70 text-sm">
           © {currentYear} Abax Professional Services. All Rights Reserved.
         </div>
