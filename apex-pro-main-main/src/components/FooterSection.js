@@ -8,12 +8,12 @@ export default function FooterSection() {
   const [email, setEmail] = useState("");
   const [showModal, setShowModal] = useState(false);
 
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (!email) return;
-    setShowModal(true);
-    setEmail("");
-  };
+  // const handleSubscribe = (e) => {
+  //   e.preventDefault();
+  //   if (!email) return;
+  //   setShowModal(true);
+  //   setEmail("");
+  // };
 
   const closeModal = () => setShowModal(false);
 
