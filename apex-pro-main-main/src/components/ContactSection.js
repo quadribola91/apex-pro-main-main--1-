@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-
 import {
   FaMapMarkerAlt,
   FaPhoneAlt,
@@ -45,42 +44,42 @@ export default function ContactSection() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  setLoading(true);
-  setStatus("Sending message...");
+    setLoading(true);
+    setStatus("Sending message...");
 
-  try {
-    const res = await fetch("http://localhost:5001/send-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        message,
-      }),
-    });
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+        }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (res.ok) {
-      setStatus("✅ Message sent successfully!");
-      setName("");
-      setEmail("");
-      setMessage("");
-    } else {
-      console.log(data);
-      setStatus("❌ Failed to send message.");
+      if (res.ok) {
+        setStatus("✅ Message sent successfully!");
+        setName("");
+        setEmail("");
+        setMessage("");
+      } else {
+        console.log(data);
+        setStatus("❌ Failed to send message.");
+      }
+    } catch (error) {
+      console.log(error);
+      setStatus("❌ Server error.");
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.log(error);
-    setStatus("❌ Server error.");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <>
@@ -155,10 +154,7 @@ export default function ContactSection() {
               Send us a Message
             </h3>
 
-            {/* ✅ IMPORTANT FIX: name attributes added */}
-
             <input
-              name="name"
               className="w-full border border-gray-300 p-3 rounded-md"
               placeholder="Full Name"
               type="text"
@@ -168,7 +164,6 @@ export default function ContactSection() {
             />
 
             <input
-              name="email"
               className="w-full border border-gray-300 p-3 rounded-md"
               placeholder="Email"
               type="email"
@@ -178,7 +173,6 @@ export default function ContactSection() {
             />
 
             <textarea
-              name="message"
               className="w-full border border-gray-300 p-3 rounded-md h-32"
               placeholder="Your Message"
               value={message}
