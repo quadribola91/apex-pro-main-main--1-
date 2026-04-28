@@ -11,7 +11,6 @@ import img5 from "../assets/Anthony Ebele.jpg";
 import img6 from "../assets/Dare Osoneye.JPG";
 import CallToAction from "./CallToAction";
 
-/* ---------------- DATA ---------------- */
 const principal = {
   name: "Olapeju Sofowora B.SC, FCA, FCIT",
   designation: "Principal Consultant",
@@ -30,29 +29,28 @@ const teamMembers = [
     name: "Babafunke Ajibade",
     designation: "Senior Consultant Audit and Assurance",
     image: img4,
-    bio: `A multi-skilled Governance, Financial Accounts, Risk, Audit, Assurance, and Compliance Executive across Private, Government and Third party (Charity) Sectors with over three decades of progressive experience across Nigeria and the United Kingdom. Her core strength lies in quality control on Assurance Audits advising Boards, Trustees and Senior Management on enterprise risk, strategy, compliance, business continuity, internal audit practice, helping organizations strengthen performance, compliance on accounting and auditing standards, sustain competitive advantage at industry level and respond proactively to disruption.`,
+    bio: `A multi-skilled Governance, Financial Accounts, Risk, Audit, Assurance, and Compliance Executive with decades of progressive experience.`,
   },
   {
     name: "Fusi Akinkugbe",
     designation: "Senior Consultant Financial Services",
     image: img3,
-    bio: `Mr. Fusi Akinkugbe is a seasoned finance and assurance professional with nearly four decades of experience spanning professional practice, corporate leadership, consulting, and the public sector.`,
+    bio: `Seasoned finance and assurance professional with nearly four decades of experience.`,
   },
   {
     name: "Anthony Ebele",
     designation: "Head, Tax Management and Advisory",
     image: img5,
-    bio: `Anthony Ebele is a results-driven tax professional with strong expertise in tax compliance, advisory, and regulatory reporting.`,
+    bio: `Results-driven tax professional with strong expertise in tax compliance and advisory.`,
   },
   {
     name: "Dare Osoneye",
     designation: "Head, Human Resource Consulting",
     image: img6,
-    bio: `Dare Osoneye is a dedicated Human Resource professional with years of experience in talent acquisition, employee relations, performance management and organisational development.`,
+    bio: `Dedicated Human Resource professional with years of experience in organisational development.`,
   },
 ];
 
-/* ---------------- COMPONENT ---------------- */
 export default function TeamPage() {
   const [view, setView] = useState("principal");
   const [activeMember, setActiveMember] = useState(null);
@@ -67,24 +65,24 @@ export default function TeamPage() {
             alt="Team Background"
             className="absolute inset-0 w-full h-full object-cover object-top"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-950/85 via-blue-900/60 to-blue-800/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-950/85 via-blue-900/60 to-blue-800/30" />
 
           <div className="relative z-10 px-6 max-w-4xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
               Our People
             </h1>
-            <p className="text-lg md:text-xl text-blue-100">
+            <p className="text-lg md:text-xl text-blue-100 mt-3">
               Meet the team behind Abax Professional Services
             </p>
           </div>
         </section>
 
         {/* TOGGLE */}
-        <div className="flex justify-center gap-4 py-10">
-          <div className="bg-white shadow-md rounded-full p-1 flex">
+        <div className="flex justify-center py-10 px-6">
+          <div className="bg-white shadow-md rounded-full p-1 flex flex-wrap gap-2">
             <button
               onClick={() => setView("principal")}
-              className={`px-6 py-2 rounded-full text-sm font-semibold ${
+              className={`px-6 py-3 rounded-full text-sm font-semibold transition ${
                 view === "principal"
                   ? "bg-blue-700 text-white"
                   : "text-gray-600"
@@ -92,10 +90,13 @@ export default function TeamPage() {
             >
               Principal Consultant
             </button>
+
             <button
               onClick={() => setView("team")}
-              className={`px-6 py-2 rounded-full text-sm font-semibold ${
-                view === "team" ? "bg-blue-700 text-white" : "text-gray-600"
+              className={`px-6 py-3 rounded-full text-sm font-semibold transition ${
+                view === "team"
+                  ? "bg-blue-700 text-white"
+                  : "text-gray-600"
               }`}
             >
               Team Members
@@ -103,23 +104,44 @@ export default function TeamPage() {
           </div>
         </div>
 
-        {/* PRINCIPAL */}
+        {/* PRINCIPAL SECTION */}
         {view === "principal" && (
-          <section className="max-w-6xl mx-auto px-6 pb-20">
-            <div className="grid md:grid-cols-2 gap-12 items-center bg-white p-10 shadow-lg rounded-2xl">
-              <img
-                src={principal.image}
-                alt={principal.name}
-                className="rounded-2xl w-full object-cover object-top shadow-md"
-              />
+          <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
+            <div className="grid lg:grid-cols-2 gap-14 items-center bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100">
+              {/* IMAGE WITH HOVER ENLARGE EFFECT */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="relative group"
+              >
+                <div className="absolute -inset-3 bg-gradient-to-r from-blue-600/20 to-yellow-400/20 rounded-[2rem] blur-xl opacity-70 group-hover:opacity-100 transition duration-500" />
+
+                <div className="relative overflow-hidden rounded-[2rem] shadow-2xl bg-white border border-gray-100">
+                  <img
+                    src={principal.image}
+                    alt={principal.name}
+                    className="w-full h-[560px] object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                </div>
+              </motion.div>
+
+              {/* CONTENT */}
               <div>
-                <h2 className="text-3xl font-bold text-gray-900">
+                <p className="text-sm uppercase tracking-[0.18em] text-blue-700 font-semibold mb-3">
+                  Leadership
+                </p>
+
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
                   {principal.name}
                 </h2>
-                <p className="text-blue-700 font-semibold mt-2 mb-6">
+
+                <p className="text-blue-700 font-semibold mt-3 mb-6 text-lg">
                   {principal.designation}
                 </p>
-                <p className="text-gray-600 leading-relaxed whitespace-pre-line">
+
+                <p className="text-gray-600 leading-relaxed whitespace-pre-line text-base">
                   {principal.bio}
                 </p>
               </div>
@@ -127,14 +149,14 @@ export default function TeamPage() {
           </section>
         )}
 
-        {/* TEAM */}
+        {/* TEAM MEMBERS */}
         {view === "team" && (
-          <section className="max-w-7xl mx-auto px-6 pb-24">
+          <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {teamMembers.map((m, i) => (
                 <motion.div
                   key={i}
-                  whileHover={{ y: -4 }}
+                  whileHover={{ y: -6 }}
                   onClick={() => setActiveMember(m)}
                   className="cursor-pointer group rounded-2xl border border-gray-200 bg-white hover:shadow-xl transition"
                 >
@@ -173,13 +195,9 @@ export default function TeamPage() {
                   alt={activeMember.name}
                   className="w-full rounded-xl mb-6"
                 />
-                <h2 className="text-2xl font-bold">
-                  {activeMember.name}
-                </h2>
-                <p className="text-blue-700 mb-4">
-                  {activeMember.designation}
-                </p>
-                <p className="text-gray-700 whitespace-pre-line leading-relaxed break-words">
+                <h2 className="text-2xl font-bold">{activeMember.name}</h2>
+                <p className="text-blue-700 mb-4">{activeMember.designation}</p>
+                <p className="text-gray-700 leading-relaxed break-words">
                   {activeMember.bio}
                 </p>
               </div>
