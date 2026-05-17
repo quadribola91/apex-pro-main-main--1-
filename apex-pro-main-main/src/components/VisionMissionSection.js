@@ -7,48 +7,79 @@ export default function VisionMissionSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => entry.isIntersecting && setVisible(true),
-      { threshold: 0.25 },
+      { threshold: 0.25 }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  const Card = ({ icon, title, text, accent, delay }) => (
+  const Card = ({ title, text, accent, delay }) => (
     <div
       className={`group relative flex items-center justify-center transition-all duration-1000
-      ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}`}
+      ${
+        visible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-20"
+      }`}
       style={{ transitionDelay: delay }}
     >
-      {/* Rotating Gradient Ring */}
+      {/* OUTER GLOW */}
       <div
-        className={`absolute w-[340px] h-[340px] rounded-full blur-md opacity-60
-        bg-gradient-to-r ${accent}
-        animate-spin-slow group-hover:opacity-100`}
+        className={`absolute w-[380px] h-[380px] rounded-full blur-[90px] opacity-30
+        bg-gradient-to-br ${accent}`}
       />
 
-      {/* Main Circle */}
+      {/* GLASS CIRCLE CARD */}
       <div
-        className="relative w-[300px] h-[300px] rounded-full bg-white shadow-xl
-        flex flex-col items-center justify-center text-center p-10
-        transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl"
+        className="
+          relative
+          w-[320px]
+          h-[320px]
+          rounded-full
+          bg-white/10
+          backdrop-blur-xl
+          border border-white/20
+          shadow-2xl
+          flex flex-col
+          items-center
+          justify-center
+          text-center
+          p-10
+          transition-all duration-500
+          group-hover:scale-105
+          group-hover:-translate-y-2
+        "
       >
-        {/* Floating Icon Badge */}
+        {/* TOP BADGE */}
         <div
-          className={`absolute -top-10 w-20 h-20 rounded-full flex items-center justify-center
-          text-white text-3xl shadow-lg ${accent} group-hover:scale-110 transition`}
+          className={`
+            absolute -top-10
+            w-20 h-20
+            rounded-full
+            flex items-center justify-center
+            text-white
+            text-2xl
+            font-bold
+            shadow-xl
+            bg-gradient-to-br ${accent}
+            group-hover:scale-110
+            transition-all duration-500
+          `}
         >
-          {icon}
+          {title === "Vision" ? "V" : "M"}
         </div>
 
-        {/* Title */}
-        <h3 className="text-2xl font-bold text-blue-700 mt-6 mb-4">{title}</h3>
+        {/* TITLE */}
+        <h3 className="text-3xl font-bold text-white mt-6 mb-4">
+          {title}
+        </h3>
 
-        {/* Divider */}
-        <div className="w-16 h-1 bg-yellow-400 mb-4 rounded-full group-hover:w-24 transition-all"></div>
+        {/* DIVIDER */}
+        <div className="w-16 h-1 rounded-full bg-white/60 mb-5 group-hover:w-24 transition-all duration-500" />
 
-        {/* Text */}
-        <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-800 transition">
+        {/* TEXT */}
+        <p className="text-gray-200 text-sm leading-relaxed max-w-[240px]">
           {text}
         </p>
       </div>
@@ -58,35 +89,56 @@ export default function VisionMissionSection() {
   return (
     <section
       ref={sectionRef}
-      className="py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden bg-slate-950"
     >
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Heading */}
+      {/* MODERN BACKGROUND */}
+      <div className="absolute inset-0 z-0">
+        {/* gradient glow */}
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-500/20 blur-[120px] rounded-full" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-500/20 blur-[120px] rounded-full" />
+        <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-cyan-400/10 blur-[100px] rounded-full -translate-x-1/2 -translate-y-1/2" />
+
+        {/* subtle grid */}
+        <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:60px_60px]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* HEADING */}
         <div
-          className={`text-center mb-20 transition-all duration-1000
-          ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`text-center mb-24 transition-all duration-1000
+          ${
+            visible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-10"
+          }`}
         >
-          <h2 className="text-4xl font-bold text-blue-800">
+          <p className="text-sm uppercase tracking-[4px] text-blue-300 font-medium mb-3">
+            Our Purpose
+          </p>
+
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
             Our Vision & Mission
           </h2>
-          <p className="text-gray-500 font-medium mt-4">
-            Trusted insight and sustainable growth
+
+          <p className="text-gray-300 font-medium mt-5 max-w-2xl mx-auto">
+            Trusted insight, strategic excellence, and sustainable
+            organisational growth.
           </p>
         </div>
 
-        {/* Circles */}
+        {/* CIRCLES */}
         <div className="flex flex-col lg:flex-row items-center justify-center gap-24">
           <Card
             title="Vision"
             delay="0.2s"
-            accent="from-yellow-100 to-gray-200"
+            accent="from-yellow-400 via-orange-400 to-amber-500"
             text="To build a resilient, high-performing professional services firm that consistently delivers measurable value and supports sustainable organisational growth."
           />
 
           <Card
             title="Mission"
             delay="0.4s"
-            accent="from-blue-100 to-indigo-200"
+            accent="from-blue-500 via-indigo-500 to-purple-500"
             text="To deliver high-quality assurance and advisory services that strengthen governance, enhance transparency, and create measurable value."
           />
         </div>

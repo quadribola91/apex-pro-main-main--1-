@@ -1,4 +1,3 @@
-// src/pages/TeamPage.js
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -57,21 +56,23 @@ export default function TeamPage() {
 
   return (
     <>
-      <div className="bg-gray-50 min-h-screen overflow-hidden">
+      <div className="bg-slate-950 min-h-screen overflow-hidden text-white">
+
         {/* HERO */}
-        <section className="relative min-h-[55vh] flex items-center justify-center text-center text-white">
+        <section className="relative min-h-[55vh] flex items-center justify-center text-center">
           <img
             src={heroImg}
             alt="Team Background"
             className="absolute inset-0 w-full h-full object-cover object-top"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-950/85 via-blue-900/60 to-blue-800/30" />
+
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-blue-950/70 to-blue-900/40" />
 
           <div className="relative z-10 px-6 max-w-4xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+            <h1 className="text-4xl md:text-6xl font-bold">
               Our People
             </h1>
-            <p className="text-lg md:text-xl text-blue-100 mt-3">
+            <p className="text-gray-300 mt-4 text-lg">
               Meet the team behind Abax Professional Services
             </p>
           </div>
@@ -79,13 +80,13 @@ export default function TeamPage() {
 
         {/* TOGGLE */}
         <div className="flex justify-center py-10 px-6">
-          <div className="bg-white shadow-md rounded-full p-1 flex flex-wrap gap-2">
+          <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-full p-1 flex gap-2">
             <button
               onClick={() => setView("principal")}
               className={`px-6 py-3 rounded-full text-sm font-semibold transition ${
                 view === "principal"
-                  ? "bg-blue-700 text-white"
-                  : "text-gray-600"
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-300"
               }`}
             >
               Principal Consultant
@@ -95,8 +96,8 @@ export default function TeamPage() {
               onClick={() => setView("team")}
               className={`px-6 py-3 rounded-full text-sm font-semibold transition ${
                 view === "team"
-                  ? "bg-blue-700 text-white"
-                  : "text-gray-600"
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-300"
               }`}
             >
               Team Members
@@ -104,44 +105,36 @@ export default function TeamPage() {
           </div>
         </div>
 
-        {/* PRINCIPAL SECTION */}
+        {/* PRINCIPAL */}
         {view === "principal" && (
-          <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
-            <div className="grid lg:grid-cols-2 gap-14 items-center bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100">
-              {/* IMAGE WITH HOVER ENLARGE EFFECT */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="relative group"
-              >
-                <div className="absolute -inset-3 bg-gradient-to-r from-blue-600/20 to-yellow-400/20 rounded-[2rem] blur-xl opacity-70 group-hover:opacity-100 transition duration-500" />
+          <section className="max-w-7xl mx-auto px-6 pb-24">
+            <div className="grid lg:grid-cols-2 gap-14 items-start bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10">
 
-                <div className="relative overflow-hidden rounded-[2rem] shadow-2xl bg-white border border-gray-100">
-                  <img
-                    src={principal.image}
-                    alt={principal.name}
-                    className="w-full h-[560px] object-cover object-top transition-transform duration-700 group-hover:scale-110"
-                  />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                </div>
+              {/* IMAGE */}
+              <motion.div whileHover={{ scale: 1.03 }}>
+                <img
+                  src={principal.image}
+                  alt={principal.name}
+                  className="w-full h-[520px] object-cover object-top rounded-2xl"
+                />
               </motion.div>
 
               {/* CONTENT */}
               <div>
-                <p className="text-sm uppercase tracking-[0.18em] text-blue-700 font-semibold mb-3">
-                  Leadership
-                </p>
 
-                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
-                  {principal.name}
-                </h2>
+                {/* NAME + TITLE SAME LINE */}
+                <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+                  <h2 className="text-2xl md:text-3xl font-bold">
+                    {principal.name}
+                  </h2>
 
-                <p className="text-blue-700 font-semibold mt-3 mb-6 text-lg">
-                  {principal.designation}
-                </p>
+                  <span className="text-blue-400 font-semibold text-sm whitespace-nowrap">
+                    {principal.designation}
+                  </span>
+                </div>
 
-                <p className="text-gray-600 leading-relaxed whitespace-pre-line text-base">
+                {/* BIO (SINGLE CLEAN BLOCK) */}
+                <p className="text-gray-300 leading-relaxed text-base whitespace-pre-line">
                   {principal.bio}
                 </p>
               </div>
@@ -151,24 +144,41 @@ export default function TeamPage() {
 
         {/* TEAM MEMBERS */}
         {view === "team" && (
-          <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
+          <section className="max-w-7xl mx-auto px-6 pb-24">
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
               {teamMembers.map((m, i) => (
                 <motion.div
                   key={i}
                   whileHover={{ y: -6 }}
                   onClick={() => setActiveMember(m)}
-                  className="cursor-pointer group rounded-2xl border border-gray-200 bg-white hover:shadow-xl transition"
+                  className="cursor-pointer bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-white/20 transition"
                 >
-                  <div className="p-6">
+
+                  {/* TOP ROW (IMAGE + TEXT SAME LINE) */}
+                  <div className="flex items-center gap-4 mb-4">
                     <img
                       src={m.image}
                       alt={m.name}
-                      className="w-20 h-20 rounded-xl object-cover mb-4"
+                      className="w-14 h-14 rounded-xl object-cover"
                     />
-                    <h3 className="text-lg font-semibold">{m.name}</h3>
-                    <p className="text-blue-700 text-sm">{m.designation}</p>
+
+                    <div className="min-w-0">
+                      <h3 className="text-base font-semibold truncate">
+                        {m.name}
+                      </h3>
+
+                      <p className="text-blue-400 text-xs truncate">
+                        {m.designation}
+                      </p>
+                    </div>
                   </div>
+
+                  {/* BIO PREVIEW (OPTIONAL CLEAN BLOCK) */}
+                  <p className="text-gray-400 text-sm line-clamp-3">
+                    {m.bio}
+                  </p>
+
                 </motion.div>
               ))}
             </div>
@@ -182,9 +192,9 @@ export default function TeamPage() {
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              className="fixed top-0 right-0 w-full md:w-[500px] h-full bg-white shadow-2xl z-50 flex flex-col border-l"
+              className="fixed top-0 right-0 w-full md:w-[500px] h-full bg-slate-950 border-l border-white/10 z-50"
             >
-              <div className="p-6 border-b flex justify-between">
+              <div className="p-6 border-b border-white/10 flex justify-between">
                 <h2 className="font-bold">Profile</h2>
                 <button onClick={() => setActiveMember(null)}>✕</button>
               </div>
@@ -195,9 +205,16 @@ export default function TeamPage() {
                   alt={activeMember.name}
                   className="w-full rounded-xl mb-6"
                 />
-                <h2 className="text-2xl font-bold">{activeMember.name}</h2>
-                <p className="text-blue-700 mb-4">{activeMember.designation}</p>
-                <p className="text-gray-700 leading-relaxed break-words">
+
+                <h2 className="text-2xl font-bold">
+                  {activeMember.name}
+                </h2>
+
+                <p className="text-blue-400 mb-4">
+                  {activeMember.designation}
+                </p>
+
+                <p className="text-gray-300 leading-relaxed break-words">
                   {activeMember.bio}
                 </p>
               </div>
