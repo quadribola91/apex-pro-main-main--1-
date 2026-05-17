@@ -5,7 +5,6 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -18,13 +17,8 @@ export default function Navbar() {
     document.body.style.overflow = mobileOpen ? "hidden" : "auto";
   }, [mobileOpen]);
 
-  const toggleDropdown = (key) => {
-    setOpenDropdown((prev) => (prev === key ? null : key));
-  };
-
   const closeMobileMenu = () => {
     setMobileOpen(false);
-    setOpenDropdown(null);
   };
 
   return (
@@ -35,21 +29,15 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      {/* FULL WIDTH HEADER */}
       <div className="w-full px-6 md:px-10 lg:px-14">
         <div className="flex items-center justify-between h-20">
 
-          {/* LOGO (BIGGER) */}
+          {/* LOGO */}
           <Link to="/" className="flex items-center z-50">
             <img
               src={logo}
               alt="logo"
-              className="
-                h-16 md:h-20 lg:h-24
-                w-auto
-                transition-transform duration-300
-                hover:scale-105
-              "
+              className="h-16 md:h-20 lg:h-24 w-auto transition-transform duration-300 hover:scale-105"
             />
           </Link>
 
