@@ -1,3 +1,7 @@
+// ===============================
+// src/pages/TeamPage.js
+// ===============================
+
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -57,7 +61,6 @@ export default function TeamPage() {
   return (
     <>
       <div className="bg-slate-950 min-h-screen overflow-hidden text-white">
-
         {/* HERO */}
         <section className="relative min-h-[55vh] flex items-center justify-center text-center">
           <img
@@ -109,9 +112,9 @@ export default function TeamPage() {
         {view === "principal" && (
           <section className="max-w-7xl mx-auto px-6 pb-24">
             <div className="grid lg:grid-cols-2 gap-14 items-start bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10">
-
+              
               {/* IMAGE */}
-              <motion.div whileHover={{ scale: 1.03 }}>
+              <motion.div whileHover={{ scale: 1.02 }}>
                 <img
                   src={principal.image}
                   alt={principal.name}
@@ -121,10 +124,9 @@ export default function TeamPage() {
 
               {/* CONTENT */}
               <div>
-
                 {/* NAME + TITLE SAME LINE */}
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-                  <h2 className="text-2xl md:text-3xl font-bold">
+                  <h2 className="text-2xl md:text-3xl font-bold leading-tight">
                     {principal.name}
                   </h2>
 
@@ -133,7 +135,7 @@ export default function TeamPage() {
                   </span>
                 </div>
 
-                {/* BIO (SINGLE CLEAN BLOCK) */}
+                {/* BIO */}
                 <p className="text-gray-300 leading-relaxed text-base whitespace-pre-line">
                   {principal.bio}
                 </p>
@@ -146,39 +148,36 @@ export default function TeamPage() {
         {view === "team" && (
           <section className="max-w-7xl mx-auto px-6 pb-24">
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-              {teamMembers.map((m, i) => (
+              {teamMembers.map((member, i) => (
                 <motion.div
                   key={i}
                   whileHover={{ y: -6 }}
-                  onClick={() => setActiveMember(m)}
+                  onClick={() => setActiveMember(member)}
                   className="cursor-pointer bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-white/20 transition"
                 >
-
-                  {/* TOP ROW (IMAGE + TEXT SAME LINE) */}
+                  {/* TOP SECTION */}
                   <div className="flex items-center gap-4 mb-4">
                     <img
-                      src={m.image}
-                      alt={m.name}
+                      src={member.image}
+                      alt={member.name}
                       className="w-14 h-14 rounded-xl object-cover"
                     />
 
                     <div className="min-w-0">
                       <h3 className="text-base font-semibold truncate">
-                        {m.name}
+                        {member.name}
                       </h3>
 
-                      <p className="text-blue-400 text-xs truncate">
-                        {m.designation}
+                      <p className="text-blue-400 text-xs leading-relaxed">
+                        {member.designation}
                       </p>
                     </div>
                   </div>
 
-                  {/* BIO PREVIEW (OPTIONAL CLEAN BLOCK) */}
-                  <p className="text-gray-400 text-sm line-clamp-3">
-                    {m.bio}
+                  {/* SHORT BIO */}
+                  <p className="text-gray-400 text-sm line-clamp-3 leading-relaxed">
+                    {member.bio}
                   </p>
-
                 </motion.div>
               ))}
             </div>
@@ -192,29 +191,37 @@ export default function TeamPage() {
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              className="fixed top-0 right-0 w-full md:w-[500px] h-full bg-slate-950 border-l border-white/10 z-50"
+              transition={{ duration: 0.35 }}
+              className="fixed top-0 right-0 w-full md:w-[550px] h-full bg-slate-950 border-l border-white/10 z-50 flex flex-col"
             >
-              <div className="p-6 border-b border-white/10 flex justify-between">
-                <h2 className="font-bold">Profile</h2>
-                <button onClick={() => setActiveMember(null)}>✕</button>
+              {/* HEADER */}
+              <div className="p-6 border-b border-white/10 flex justify-between items-center">
+                <h2 className="font-bold text-lg">Profile</h2>
+                <button
+                  onClick={() => setActiveMember(null)}
+                  className="text-xl"
+                >
+                  ✕
+                </button>
               </div>
 
-              <div className="p-6 overflow-y-auto">
+              {/* SCROLLABLE CONTENT */}
+              <div className="flex-1 overflow-y-auto p-6">
                 <img
                   src={activeMember.image}
                   alt={activeMember.name}
                   className="w-full rounded-xl mb-6"
                 />
 
-                <h2 className="text-2xl font-bold">
+                <h2 className="text-2xl font-bold leading-tight">
                   {activeMember.name}
                 </h2>
 
-                <p className="text-blue-400 mb-4">
+                <p className="text-blue-400 mt-2 mb-5">
                   {activeMember.designation}
                 </p>
 
-                <p className="text-gray-300 leading-relaxed break-words">
+                <p className="text-gray-300 leading-relaxed break-words whitespace-pre-line">
                   {activeMember.bio}
                 </p>
               </div>

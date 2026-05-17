@@ -1,3 +1,7 @@
+// ===============================
+// src/components/Navbar.js
+// ===============================
+
 import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/abax_no_bg.png";
@@ -5,6 +9,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -17,8 +22,13 @@ export default function Navbar() {
     document.body.style.overflow = mobileOpen ? "hidden" : "auto";
   }, [mobileOpen]);
 
+  const toggleDropdown = (key) => {
+    setOpenDropdown((prev) => (prev === key ? null : key));
+  };
+
   const closeMobileMenu = () => {
     setMobileOpen(false);
+    setOpenDropdown(null);
   };
 
   return (
@@ -31,7 +41,6 @@ export default function Navbar() {
     >
       <div className="w-full px-6 md:px-10 lg:px-14">
         <div className="flex items-center justify-between h-20">
-
           {/* LOGO */}
           <Link to="/" className="flex items-center z-50">
             <img
@@ -44,7 +53,9 @@ export default function Navbar() {
           {/* DESKTOP NAV */}
           <nav
             className={`hidden md:flex items-center gap-10 text-sm tracking-wide ${
-              scrolled ? "text-gray-800 font-semibold" : "text-white font-medium"
+              scrolled
+                ? "text-gray-800 font-semibold"
+                : "text-white font-medium"
             }`}
           >
             <NavLink to="/" className="hover:text-blue-600 transition">
@@ -59,19 +70,31 @@ export default function Navbar() {
               </button>
 
               <div className="absolute top-full left-0 mt-3 bg-white text-gray-800 shadow-xl rounded-xl overflow-hidden opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 min-w-[200px]">
-                <Link to="/about" className="block px-5 py-3 hover:bg-gray-100">
+                <Link
+                  to="/about"
+                  className="block px-5 py-3 hover:bg-gray-100"
+                >
                   About Us
                 </Link>
-                <Link to="/team" className="block px-5 py-3 hover:bg-gray-100">
+                <Link
+                  to="/team"
+                  className="block px-5 py-3 hover:bg-gray-100"
+                >
                   Our Team
                 </Link>
-                <Link to="/faqs" className="block px-5 py-3 hover:bg-gray-100">
+                <Link
+                  to="/faqs"
+                  className="block px-5 py-3 hover:bg-gray-100"
+                >
                   FAQs
                 </Link>
               </div>
             </div>
 
-            <NavLink to="/servicepage" className="hover:text-blue-600 transition">
+            <NavLink
+              to="/servicepage"
+              className="hover:text-blue-600 transition"
+            >
               Services
             </NavLink>
 
@@ -97,7 +120,7 @@ export default function Navbar() {
             </NavLink>
           </nav>
 
-          {/* MOBILE MENU BUTTON */}
+          {/* MOBILE BUTTON */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden relative w-8 h-8 z-50"
@@ -121,29 +144,108 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* MOBILE MENU */}
+      {/* MOBILE FULL MENU */}
       <div
         className={`fixed inset-0 bg-white flex flex-col items-center justify-center text-lg font-semibold transition-transform duration-500 md:hidden ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <Link to="/" onClick={closeMobileMenu} className="py-4 w-4/5 text-center border-b">
+        <Link
+          to="/"
+          onClick={closeMobileMenu}
+          className="py-4 w-4/5 text-center border-b"
+        >
           Home
         </Link>
 
-        <Link to="/about" onClick={closeMobileMenu} className="py-4 w-4/5 text-center border-b">
-          About
-        </Link>
+        {/* ABOUT DROPDOWN */}
+        <div className="w-4/5 border-b text-center">
+          <button
+            onClick={() => toggleDropdown("about")}
+            className="w-full py-4 flex justify-center items-center gap-2"
+          >
+            About
+            <span
+              className={`transition-transform duration-300 ${
+                openDropdown === "about" ? "rotate-180" : ""
+              }`}
+            >
+              ⌄
+            </span>
+          </button>
 
-        <Link to="/servicepage" onClick={closeMobileMenu} className="py-4 w-4/5 text-center border-b">
+          <div
+            className={`overflow-hidden transition-all duration-500 ${
+              openDropdown === "about"
+                ? "max-h-96 opacity-100"
+                : "max-h-0 opacity-0"
+            }`}
+          >
+            <Link
+              to="/about"
+              onClick={closeMobileMenu}
+              className="block py-3 border-t"
+            >
+              About Us
+            </Link>
+            <Link
+              to="/team"
+              onClick={closeMobileMenu}
+              className="block py-3 border-t"
+            >
+              Our Team
+            </Link>
+            <Link
+              to="/faqs"
+              onClick={closeMobileMenu}
+              className="block py-3 border-t"
+            >
+              FAQs
+            </Link>
+          </div>
+        </div>
+
+        <Link
+          to="/servicepage"
+          onClick={closeMobileMenu}
+          className="py-4 w-4/5 text-center border-b"
+        >
           Services
         </Link>
 
-        <Link to="/team" onClick={closeMobileMenu} className="py-4 w-4/5 text-center border-b">
-          Team
-        </Link>
+        {/* BLOGS DROPDOWN */}
+        <div className="w-4/5 border-b text-center">
+          <button
+            onClick={() => toggleDropdown("blogs")}
+            className="w-full py-4 flex justify-center items-center gap-2"
+          >
+            Blogs
+            <span
+              className={`transition-transform duration-300 ${
+                openDropdown === "blogs" ? "rotate-180" : ""
+              }`}
+            >
+              ⌄
+            </span>
+          </button>
 
-        <Link to="/contact" onClick={closeMobileMenu} className="py-4 w-4/5 text-center border-b">
+          <div
+            className={`overflow-hidden transition-all duration-500 ${
+              openDropdown === "blogs"
+                ? "max-h-96 opacity-100"
+                : "max-h-0 opacity-0"
+            }`}
+          >
+            <div className="py-3 border-t">Publications & News</div>
+            <div className="py-3 border-t">Image Gallery</div>
+          </div>
+        </div>
+
+        <Link
+          to="/contact"
+          onClick={closeMobileMenu}
+          className="py-4 w-4/5 text-center border-b"
+        >
           Contact
         </Link>
       </div>
