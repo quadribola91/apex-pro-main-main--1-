@@ -1,5 +1,6 @@
 // ===============================
 // src/components/Navbar.js
+// FINAL CLEAN VERSION
 // ===============================
 
 import React, { useState, useEffect } from "react";
@@ -13,8 +14,12 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+
     window.addEventListener("scroll", onScroll);
+
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -35,24 +40,25 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-lg border-b border-gray-100"
+          ? "bg-white shadow-md"
           : "bg-transparent"
       }`}
     >
       <div className="w-full px-6 md:px-10 lg:px-14">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
+
           {/* LOGO */}
           <Link to="/" className="flex items-center z-50">
             <img
               src={logo}
               alt="logo"
-              className="h-16 md:h-20 lg:h-24 w-auto transition-transform duration-300 hover:scale-105"
+              className="h-14 md:h-16 lg:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
             />
           </Link>
 
           {/* DESKTOP NAV */}
           <nav
-            className={`hidden md:flex items-center gap-10 text-sm tracking-wide ${
+            className={`hidden md:flex items-center gap-10 text-sm tracking-wide transition-all duration-300 ${
               scrolled
                 ? "text-gray-800 font-semibold"
                 : "text-white font-medium"
@@ -76,12 +82,14 @@ export default function Navbar() {
                 >
                   About Us
                 </Link>
+
                 <Link
                   to="/team"
                   className="block px-5 py-3 hover:bg-gray-100"
                 >
                   Our Team
                 </Link>
+
                 <Link
                   to="/faqs"
                   className="block px-5 py-3 hover:bg-gray-100"
@@ -109,18 +117,22 @@ export default function Navbar() {
                 <div className="px-5 py-3 hover:bg-gray-100 cursor-pointer">
                   Publications & News
                 </div>
+
                 <div className="px-5 py-3 hover:bg-gray-100 cursor-pointer">
                   Image Gallery
                 </div>
               </div>
             </div>
 
-            <NavLink to="/contact" className="hover:text-blue-600 transition">
+            <NavLink
+              to="/contact"
+              className="hover:text-blue-600 transition"
+            >
               Contact
             </NavLink>
           </nav>
 
-          {/* MOBILE BUTTON */}
+          {/* MOBILE MENU BUTTON */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden relative w-8 h-8 z-50"
@@ -130,11 +142,13 @@ export default function Navbar() {
                 scrolled ? "bg-black" : "bg-white"
               } ${mobileOpen ? "rotate-45 top-4" : "top-2"}`}
             />
+
             <span
               className={`absolute w-8 h-0.5 transition-all duration-300 ${
                 scrolled ? "bg-black" : "bg-white"
               } ${mobileOpen ? "opacity-0 top-4" : "top-4"}`}
             />
+
             <span
               className={`absolute w-8 h-0.5 transition-all duration-300 ${
                 scrolled ? "bg-black" : "bg-white"
@@ -165,6 +179,7 @@ export default function Navbar() {
             className="w-full py-4 flex justify-center items-center gap-2"
           >
             About
+
             <span
               className={`transition-transform duration-300 ${
                 openDropdown === "about" ? "rotate-180" : ""
@@ -188,6 +203,7 @@ export default function Navbar() {
             >
               About Us
             </Link>
+
             <Link
               to="/team"
               onClick={closeMobileMenu}
@@ -195,6 +211,7 @@ export default function Navbar() {
             >
               Our Team
             </Link>
+
             <Link
               to="/faqs"
               onClick={closeMobileMenu}
@@ -220,6 +237,7 @@ export default function Navbar() {
             className="w-full py-4 flex justify-center items-center gap-2"
           >
             Blogs
+
             <span
               className={`transition-transform duration-300 ${
                 openDropdown === "blogs" ? "rotate-180" : ""
@@ -236,8 +254,13 @@ export default function Navbar() {
                 : "max-h-0 opacity-0"
             }`}
           >
-            <div className="py-3 border-t">Publications & News</div>
-            <div className="py-3 border-t">Image Gallery</div>
+            <div className="py-3 border-t">
+              Publications & News
+            </div>
+
+            <div className="py-3 border-t">
+              Image Gallery
+            </div>
           </div>
         </div>
 
