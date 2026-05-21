@@ -41,7 +41,7 @@ export default function Navbar() {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         scrolled
           ? "bg-white shadow-md"
-          : "bg-transparent"
+          : "bg-gradient-to-b from-black/40 to-transparent"
       }`}
     >
       <div className="w-full px-6 md:px-10 lg:px-14">
@@ -49,11 +49,19 @@ export default function Navbar() {
 
           {/* LOGO */}
           <Link to="/" className="flex items-center z-50">
-            <img
-              src={logo}
-              alt="logo"
-              className="h-14 md:h-16 lg:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
-            />
+            <div
+              className={`transition-all duration-500 ${
+                scrolled
+                  ? "bg-transparent p-0 shadow-none"
+                  : "bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl shadow-2xl"
+              }`}
+            >
+              <img
+                src={logo}
+                alt="ABAX Logo"
+                className="h-14 md:h-16 lg:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
+              />
+            </div>
           </Link>
 
           {/* DESKTOP NAV */}

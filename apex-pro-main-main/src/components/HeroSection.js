@@ -86,41 +86,53 @@ export default function HeroSection() {
     <section className="relative min-h-screen overflow-hidden bg-slate-950">
 
       {/* BACKGROUND SLIDER */}
-      <div className="absolute inset-0">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, scale: 1.02 }}
-            animate={{ opacity: 1, scale: 1.06 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.4, ease: "easeInOut" }}
-            className="absolute inset-0"
-          >
-            <img
-              src={slides[index].image}
-              alt={slides[index].title}
-              className="
-                w-full
-                h-full
-                object-cover
-                object-center
-                scale-100
-                contrast-110
-                brightness-[0.88]
-                saturate-110
-                transition-all duration-700
-              "
-            />
+<div className="absolute inset-0">
+  <AnimatePresence mode="wait">
+    <motion.div
+      key={index}
+      initial={{ opacity: 0, scale: 1.02 }}
+      animate={{ opacity: 1, scale: 1.06 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.4, ease: "easeInOut" }}
+      className="absolute inset-0"
+    >
+      <img
+        src={slides[index].image}
+        alt={slides[index].title}
+        className="
+          w-full
+          h-full
+          object-cover
+          object-center
+          scale-100
+          brightness-125
+          contrast-110
+          saturate-130
+          transition-all
+          duration-700
+        "
+      />
 
-            {/* CLEAN LUXURY OVERLAY */}
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/78 via-slate-900/55 to-blue-900/30" />
+      {/* LIGHT OVERLAY */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-black/5 to-transparent" />
 
-            {/* SOFT BLUE + YELLOW LIGHT GLOWS */}
-            <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-500/12 blur-[130px] rounded-full" />
-            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-yellow-400/10 blur-[150px] rounded-full" />
-          </motion.div>
-        </AnimatePresence>
-      </div>
+      {/* SUBTLE DEPTH */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.08) 100%)",
+        }}
+      />
+
+      {/* BLUE GLOW */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-500/10 blur-[130px] rounded-full" />
+
+      {/* GOLD GLOW */}
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-yellow-400/8 blur-[150px] rounded-full" />
+    </motion.div>
+  </AnimatePresence>
+</div>
 
       {/* GRID TEXTURE */}
       <div
